@@ -13,15 +13,12 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Lista Film</h3>
-                <select class="form-select" id="Genere" name="genre">
-                    <option value="">Selezionare un genere</option>
-                    <option th:each="genre : ${genres}" th:value="${genre.id}">
-                      <span th:text="${genre.name}"></span>
-                    </option>
-                </select>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
+                <div class="alert alert-warning" role="alert" th:if="${films.isEmpty}">
+                       Non c'è niente che stai cercando!
+                </div>
+                <div class="table-responsive" th:if="${!films.isEmpty}">
                     <table class="table table-striped table-hover table-borderless table-primary align-middle">
                         <thead class="table-light">
                             <tr>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="it">
+<head th:replace="~{layout/bs5.html::head}">
+</head> 
+<body>
+    <header th:replace="~{layout/bs5.html::header}"></header> 
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Ricerca Film</h3>
+            </div>
+            <form action="/film/search" method="post" th:object="${form}">
+                <div class="card-body">
+                    <div class="mb-3 row">
+                        <label for="title" class="col-4 col-form-label">Titolo</label>
+                        <div class="col-8">
+                            <input type="text" class="form-control" placeholder="Titolo" th:field="*{title}" />
+                        </div>
+                    </div>
+         
+                    <div class="mb-3 row">
+                        <label for="genre" class="col-4 col-form-label">Genere</label>
+                        <div class="col-8">
+                            <select class="form-control"  placeholder="Genere"  th:field="*{genre_id}" >
+                                <option value="">Selezionare un genere</option>
+                                <option th:each="genre : ${genres}"  
+                                th:value="${genre.id}" 
+                                th:text="${genre.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="card-footer ">
+                 <button type="reset" class="btn btn-warning">
+                        Annulla
+                    </button>
+                    <button type="submit" class="btn btn-outline-primary">
+                        Invia
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+    <footer th:replace="~{layout/bs5.html::footer}">
+
+    </footer>
+</body>
+
+</html>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.corso.videoteca.dto.searchFilmDto;
 import com.corso.videoteca.entities.Film;
 import com.corso.videoteca.repositories.FilmRepository;
 import com.corso.videoteca.repositories.GenreRepository;
@@ -110,4 +111,33 @@ public class FilmController {
 		return "redirect:/film/";
 	}
 	
+	@GetMapping("search")
+	public String search(Model model) {
+		
+		model.addAttribute("form",new searchFilmDto());
+		model.addAttribute("genres", gr.findAllByOrderByName());
+
+		
+		return "film/search";
+	}
+	
+	@PostMapping("search")
+	public String search2(searchFilmDto form, Model model) {
+		
+		if (form.getTitle() != null && form.getTitle().length()>2) {
+			form.setTitle("%"+form.getTitle()+"%");
+		}
+		if (form.getGenre_id() != null ) {
+			List<Film> risultato = fr.findByGenre_IdAndTitleLikeIgnoreCaseOrderByTitleAsc(form.getGenre_id(),form.getTitle());
+			model.addAttribute("films", risultato);
+		}
+		
+		else {
+			List <Film> risultato = fr.findByTitleLikeIgnoreCaseOrderByTitleAsc(form.getTitle());
+			model.addAttribute("films", risultato);
+		}
+		
+		
+		return "film/index";
+	}
 }
