@@ -13,7 +13,12 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Lista Film</h3>
-                <!--  <p th:text="${prova}"></p> -->
+                <select class="form-select" id="Genere" name="genre">
+                    <option value="">Selezionare un genere</option>
+                    <option th:each="genre : ${genres}" th:value="${genre.id}">
+                      <span th:text="${genre.name}"></span>
+                    </option>
+                </select>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -24,6 +29,7 @@
                                 <th>Titolo</th>
                                 <th>Regista</th>
                                 <th>Durata</th>
+                                <th>Genere</th>
                                 <th>Data Rilasco</th>
                                 <th>Azioni</th>
                             </tr>
@@ -45,6 +51,11 @@
                                     	<span th:text="${film.duration}"></span>
                                     	 <span>Minuti</span>
                                     </p>
+                                </td>
+                                <td>
+                                    <p th:if="${film.genre != null}">
+                                        <span th:text="${film.genre.name}"></span>
+                                    </p>  
                                 </td>
                                 <td>
                                     <p th:text="${film.published}"></p>
@@ -76,13 +87,7 @@
                                             </div>
                                           </div>
                                         </div>
-                                      </div>
-
-
-
-
-                                    
-                                    
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

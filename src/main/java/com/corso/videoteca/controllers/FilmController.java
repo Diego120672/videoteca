@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.corso.videoteca.entities.Film;
 import com.corso.videoteca.repositories.FilmRepository;
+import com.corso.videoteca.repositories.GenreRepository;
 
 
 /* 
@@ -32,14 +33,19 @@ public class FilmController {
 	@Autowired
 	private FilmRepository fr;
 	
+	@Autowired
+	private GenreRepository gr;
+	
 	@GetMapping("/")
 	public String index(Model model) {
 		//devo caricare la lista di tutti i film dal database
 		// la metto nel model
 		// restituisco una view di Thymeleaf
 		
-		 List<Film> ls = fr.findAll();
+		 List<Film> ls = fr.findAllByOrderByTitle();
 		 model.addAttribute("films",ls);
+		 
+		 model.addAttribute("genres", gr.findAllByOrderByName());
 		 
 		 return "film/index"; // resources/templates/film/index.html
 	}
@@ -49,6 +55,9 @@ public class FilmController {
 	public String create(Model model) {
 		System.out.println("GET FILM CREATE");
 		model.addAttribute("form", new Film());
+		
+		model.addAttribute("genres", gr.findAllByOrderByName());
+		
 		return "film/create";
 	}
 	
@@ -72,6 +81,8 @@ public class FilmController {
 	    Film f = fr.findById(id).get();
 		
 	    model.addAttribute("form",f);
+	    
+	    model.addAttribute("genres", gr.findAllByOrderByName());
 		
 		return "film/update";
 	}

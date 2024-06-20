@@ -7,7 +7,7 @@
     <div class="container">  
         <div class="card">
             <div class="card-header">   
-                <h3 class="card-title">Creazione Nuovo Film</h3>
+                <h3 class="card-title">Modifica Film <span th:text="${form.title}"></span></h3>
             </div> 
             <form th:action="@{/film/update/} + ${form.id}"  method="post" th:object="${form}">
                 <div class="card-body"> 
@@ -23,6 +23,18 @@
                             <input type="text" class="form-control"  placeholder="Regista"  th:field="*{director}" />
                         </div>
                     </div>
+                    <div class="mb-3 row">
+                        <label for="genre" class="col-4 col-form-label">Genere</label>
+                        <div class="col-8">
+                            <select class="form-control"  placeholder="Genere"  th:field="*{genre}" >
+                                <option value="">Selezionare un genere</option>
+                                <option th:each="genre : ${genres}"  
+                                th:value="${genre.id}" 
+                                th:text="${genre.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="mb-3 row">
                         <label for="duration" class="col-4 col-form-label">Durata</label>
                         <div class="col-8">

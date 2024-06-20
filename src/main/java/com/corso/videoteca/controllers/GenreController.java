@@ -65,7 +65,7 @@ public class GenreController {
 	public String edit(Model model) {
 		
 		//
-		 List<Genre> lg = gr.findAll();
+		 List<Genre> lg = gr.findAllByOrderByName();
 		 model.addAttribute("genres",lg);
 		
 		return "genre/update";
@@ -79,7 +79,7 @@ public class GenreController {
 		
 	    model.addAttribute("form",g);
 		
-		return "genre/update2";
+		return "genre/update";
 	}
 
 	@PostMapping("/update/{id}")
