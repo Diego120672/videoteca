@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="it">
+<head th:replace="~{layout/bs5.html::head}">
+</head> 
+<body>
+    <header th:replace="~{layout/bs5.html::header}"></header> 
+    <div class="container">  
+        <div class="card">
+            <div class="card-header">   
+                <h3 class="card-title">Modifica genere</h3>
+            </div> 
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-borderless table-primary align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Genere</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr class="table-primary" th:each="genre : ${genres}">
+                                <td>
+                                    <p th:text="${genre.id}"></p>  <!-- non va a legger film.id ma usa film.getId()  -->
+                                </td>
+                                <td>
+                                    <p th:text="${genre.name}"></p>
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-warning" th:href="@{/genre/update/} + ${genre.id}">
+                                        Modifica
+                                    </a> 
+                                    
+                                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-th-data-bs-target="'#modale' + ${genre.id}">
+                                       Cancella
+                                    </button>
+
+                                    <div class="modal fade" th:id="'modale' + ${genre.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h1 class="modal-title fs-5" id="staticBackdropLabel">Conferma cancellazione</h1>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Vuoi eliminare il genere <span th:text="${genre.name}"></span>?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                              <a type="button" class="btn btn-outline-danger" th:href="@{/genre/delete/} + ${genre.id}">
+                                                Elimina
+                                               </a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer ">
+                    <button type="submit" class="btn btn-outline-primary">
+                        Invia
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+    <footer th:replace="~{layout/bs5.html::footer}">
+
+    </footer>
+</body>
+
+</html>
