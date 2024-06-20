@@ -34,6 +34,9 @@ public class GenreController {
 		 List<Film> ls = fr.findAll();
 		 model.addAttribute("films",ls);
 		 
+		 List<Genre> lg = gr.findAll();
+		 model.addAttribute("genres",lg);
+		 
 		 return "genre/index"; // resources/templates/film/index.html
 	}
 	
@@ -63,8 +66,41 @@ public class GenreController {
 		
 		//
 		 List<Genre> lg = gr.findAll();
-		 model.addAttribute("genre",lg);
+		 model.addAttribute("genres",lg);
 		
-		return "film/update";
+		return "genre/update";
+	}
+	
+	@GetMapping("/update/{id}")   // {id} è una path Variable
+	public String edit(@PathVariable Long id, Model model) {
+		
+		//
+	    Genre g = gr.findById(id).get();
+		
+	    model.addAttribute("form",g);
+		
+		return "genre/update2";
+	}
+
+	@PostMapping("/update/{id}")
+	public String update(Model model,Genre form,@PathVariable Long id ) {
+		System.out.println("POST GENERE UPDATE");
+		System.out.println(form);
+		
+		form.setId(id); //IMPOSTA L'ID 
+		Genre update = gr.save(form);
+		System.out.println(update); 
+		
+		return "redirect:/genre/update";  //redirect: vai a endpoint /film/
+	}
+	
+	@GetMapping("/delete/{id}")   // {id} è una path Variable
+	public String delete(@PathVariable Long id) {
+		
+		//
+	    Genre g = gr.findById(id).get();
+	    gr.delete(g);
+		System.out.println("Cancellazione genere prima del redirect");
+		return "redirect:/genre/update";
 	}
 }
