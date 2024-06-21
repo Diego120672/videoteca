@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="it">
+<head th:replace="~{layout/bs5.html::head}">
+</head>
+<body>
+<header th:replace="~{layout/bs5.html::header}"></header>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Interpretazione di <span th:text="${actor.firstname}"></span> <span th:text="${actor.lastname}"></span></h3>
+        </div>
+        <form th:action="'/actor/plays/'+${actor.id}" method="post" th:object="${form}">
+            <div class="card-body">
+                <div class="mb-3 row">
+                    <label for="role" class="col-4 col-form-label">Ruolo</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" placeholder="Ruolo" th:field="*{role}"/>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="film" class="col-4 col-form-label">Film</label>
+                    <div class="col-8">
+                        <select class="form-control" placeholder="Film" th:field="*{film}">
+                            <option value="">Selezionare un film</option>
+                            <option th:each="film : ${films}"
+                                    th:value="${film.id}"
+                                    th:text="${film.title}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer ">
+                <button type="submit" class="btn btn-outline-primary">
+                    Invia
+                </button>
+            </div>
+    </div>
+    </form>
+
+
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3 class="card-title">Storico Interpretazioni</h3>
+            <!--  <p th:text="${prova}"></p> -->
+        </div>
+        <div class="card-body">
+            <div class="table-responsive" th:if="${!actor.plays.isEmpty()}">
+                <table class="table table-striped table-hover table-borderless table-primary align-middle">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Ruolo</th>
+                        <th>Titolo</th>
+                        <th>Regista</th>
+                        <th>Genere</th>
+                        <th>Durata</th>
+                        <th>Data Rilasco</th>
+                        <th>Azioni</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    <!-- for(Film film : listaFilm)-->
+                    <tr class="table-primary" th:each="play : ${actor.plays}">
+                        <td>
+                            <p th:text="${play.role}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${play.film.title}"></p>
+                        </td>
+                        <td>
+                            <p th:text="${play.film.director}"></p>
+                        </td>
+                        <td>
+                            <p th:if="${play.film.genre != null}">
+                                <span th:text="${play.film.genre.name}"></span>
+                            </p>
+                            <p th:unless="${play.film.genre != null}">
+                                <span>Nessun genere selezionato</span>
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <span th:text="${play.film.duration}"></span>
+                                <span>Minuti</span>
+                            </p>
+                        </td>
+                        <td>
+                            <p th:text="${play.film.published}"></p>
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-warning" th:href="@{/film/update/} + ${play.film.id}">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
+                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                    data-th-data-bs-target="'#modale' + ${play.film.id}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+
+                            <div class="modal fade" th:id="'modale' + ${play.id}" data-bs-backdrop="static"
+                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Conferma
+                                                cancellazione</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Vuoi eliminare l'interpretazione <span
+                                                    th:text="${play.film.title}"></span>?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Annulla
+                                            </button>
+                                            <a type="button" class="btn btn-outline-danger"
+                                               th:href="@{/play/delete/} + ${play.id}">
+                                                Elimina
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="container" th:if="${actor.plays.isEmpty()}">
+                <div class="alert alert-warning" role="alert">
+                    <p>Ancora nessuna interpretazione del nostro database</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<footer th:replace="~{layout/bs5.html::footer}">
+
+</footer>
+</body>
+
+</html>

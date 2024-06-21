@@ -15,7 +15,6 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
     //Dal Film troviamo il cast
     Set<Actor> findByPlays_FilmOrderByLastnameAscFirstnameAsc(Film film);
 
-    Set<Actor> findByPlays_Film_IdOrderByLastnameAscFirstnameAsc(Long id);
     
     Set<Actor> findAllByOrderByFirstname();
 

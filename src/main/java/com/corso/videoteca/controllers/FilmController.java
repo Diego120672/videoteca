@@ -2,6 +2,8 @@ package com.corso.videoteca.controllers;
 
 import java.util.List;
 
+import com.corso.videoteca.entities.Actor;
+import com.corso.videoteca.entities.Play;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -142,4 +144,34 @@ public class FilmController {
 		
 		return "film/index";
 	}
+
+	@GetMapping("plays/{id}")   // {id} è una path Variable
+	public String plays(@PathVariable Long id, Model model) {
+
+		Film film = fr.findById(id).get();
+
+		model.addAttribute(film);
+		Play form = new Play();
+
+		form.setId(null);
+		model.addAttribute("form", form);
+		model.addAttribute("films", fr.findAllByOrderByTitle());
+
+		return "film/plays";
+	}
+
+
+	@PostMapping("plays/{id}")
+	public String storePlays(Model model,Play form,@PathVariable Long id ) {
+		System.out.println("POST Play");
+
+		//form.setId(null); //@todo controllare da dove arriva l'id
+		Film film = fr.findById(id).get();
+		//form.setActor(actor);
+		//System.out.println("Plays -> "+form);
+		//fr.save(form);
+
+		return "redirect:/actor/plays/"+ form.getId();
+	}
+
 }

@@ -1,7 +1,9 @@
 package com.corso.videoteca.repositories;
 
 import java.util.List;
+import java.util.Set;
 
+import com.corso.videoteca.entities.Actor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.corso.videoteca.entities.Film;
@@ -23,5 +25,7 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
 
 	List<Film> findByGenre_IdAndTitleLikeIgnoreCaseOrderByTitleAsc(@Nullable Long id, @Nullable String title);
 
+	//Dall'id Film troviamo il cast
+	//Set<Actor> findByPlays_Film_IdOrderByLastnameAscFirstnameAsc(Long id);
 
 }

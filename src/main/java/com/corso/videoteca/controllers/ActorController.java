@@ -1,8 +1,10 @@
 package com.corso.videoteca.controllers;
 
-import java.util.List;
 import java.util.Set;
 
+import com.corso.videoteca.entities.Play;
+import com.corso.videoteca.repositories.FilmRepository;
+import com.corso.videoteca.repositories.PlayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.corso.videoteca.entities.Actor;
-import com.corso.videoteca.entities.Film;
-import com.corso.videoteca.entities.Genre;
 import com.corso.videoteca.repositories.ActorRepository;
-import com.corso.videoteca.repositories.GenreRepository;
 
 @RequestMapping("/actor")
 @Controller
@@ -23,6 +22,10 @@ public class ActorController {
 
 	@Autowired
 	private ActorRepository ar;
+	@Autowired
+	private FilmRepository fr;
+	@Autowired
+	private PlayRepository pr;
 	
 	@GetMapping("/")
 	public String index(Model model, Actor actor) {
@@ -91,5 +94,33 @@ public class ActorController {
 		return "redirect:/actor/";
 	}
 
+	@GetMapping("plays/{id}")   // {id} è una path Variable
+	public String plays(@PathVariable Long id, Model model) {
+
+		Actor actor = ar.findById(id).get();
+
+		model.addAttribute(actor);
+		Play form = new Play();
+
+		form.setId(null);
+		model.addAttribute("form", form);
+		model.addAttribute("films", fr.findAllByOrderByTitle());
+
+		return "actor/plays";
+	}
+
+
+	@PostMapping("plays/{id}")
+	public String storePlays(Model model,Play form,@PathVariable Long id ) {
+		System.out.println("POST Play");
+
+		//form.setId(null); //@todo controllare da dove arriva l'id
+		Actor actor = ar.findById(id).get();
+		form.setActor(actor);
+		System.out.println("Plays -> "+form);
+		pr.save(form);
+
+		return "redirect:/actor/plays/"+ form.getId();
+	}
 	
 }
