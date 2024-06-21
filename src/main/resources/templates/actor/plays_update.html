@@ -7,9 +7,10 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Interpretazione di <span th:text="${actor.firstname}"></span> <span th:text="${actor.lastname}"></span></h3>
+            <h3 class="card-title">Modifica interpretazione di <span th:text="${play.actor.firstname}"></span> <span th:text="${play.actor.lastname}"></span></h3>
         </div>
-        <form th:action="'/actor/plays/'+${actor.id}" method="post" th:object="${form}">
+
+        <form th:action="'/actor/plays_update/'+${play.id}+'/'+${play.actor.id}" method="post" th:object="${play}">
             <div class="card-body">
                 <div class="mb-3 row">
                     <label for="role" class="col-4 col-form-label">Ruolo</label>
@@ -21,10 +22,11 @@
                     <label for="film" class="col-4 col-form-label">Film</label>
                     <div class="col-8">
                         <select class="form-control" placeholder="Film" th:field="*{film}">
-                            <option value="">Selezionare un film</option>
-                            <option th:each="film : ${films}"
-                                    th:value="${film.id}"
-                                    th:text="${film.title}"></option>
+                            <option th:value="${play.film.id}" th:text="${play.film.title}"></option>
+                            <option th:each="f : ${films}"
+                                    th:value="${f.id}"
+                                    th:text="${f.title}">
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -65,7 +67,7 @@
                                     </p>
                                 </div>
 
-                                <a class="btn btn-outline-warning" th:href="@{/actor/plays_update/} + ${play.id}+'/'+ ${play.actor.id}">
+                                <a class="btn btn-outline-warning" th:href="@{/actor/plays_update/} + ${play.id}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
 
@@ -105,15 +107,9 @@
                     </div>
                 </div>
             </div>
-
-            <div class="container" th:if="${actor.plays.isEmpty()}">
-                <div class="alert alert-warning" role="alert">
-                    <p>Ancora nessuna interpretazione del nostro database</p>
-                </div>
-            </div>
-
         </div>
     </div>
+
 </div>
 <footer th:replace="~{layout/bs5.html::footer}">
 

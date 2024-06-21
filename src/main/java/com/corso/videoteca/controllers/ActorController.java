@@ -106,6 +106,7 @@ public class ActorController {
 		model.addAttribute("form", form);
 		model.addAttribute("films", fr.findAllByOrderByTitle());
 
+
 		return "actor/plays";
 	}
 
@@ -114,13 +115,65 @@ public class ActorController {
 	public String storePlays(Model model,Play form,@PathVariable Long id ) {
 		System.out.println("POST Play");
 
-		//form.setId(null); //@todo controllare da dove arriva l'id
+		Play p=new Play();
+
 		Actor actor = ar.findById(id).get();
 		form.setActor(actor);
 		System.out.println("Plays -> "+form);
-		pr.save(form);
+		p=pr.save(form);
+
+		System.out.println("id play "+p.getId()+" "+form.getId());
 
 		return "redirect:/actor/plays/"+ form.getId();
 	}
-	
+
+	@GetMapping("plays_update/{id}/{id_actor}")   // {id} è una path Variable
+	public String playsUpdate(@PathVariable Long id,@PathVariable Long id_actor, Model model) {
+
+
+		Actor actor = ar.findById(id_actor).get();
+
+		model.addAttribute(actor);
+		Play form = new Play();
+
+		form.setId(null);
+		model.addAttribute("form", form);
+		model.addAttribute("films", fr.findAllByOrderByTitle());
+
+
+
+		Play play = pr.findById(id).get();
+
+		model.addAttribute("play",play);
+		model.addAttribute("films", fr.findAllByOrderByTitle());
+
+		System.out.println("id attore -> "+id+" id film -> "+id);
+
+		return "actor/plays_update";
+	}
+
+	@PostMapping("plays_update/{id}/{id_actor}")
+	public String storePlaysUpdate(Model model,Play form,@PathVariable Long id,@PathVariable Long id_actor ) {
+		System.out.println("POST Play_update ");
+
+		Actor actor = ar.findById(id_actor).get();
+		form.setActor(actor);
+
+		form.setId(id); //IMPOSTA L'ID
+		System.out.println("++"+form.toString());
+		 pr.save(form);
+		System.out.println("-"+id);
+		//System.out.println(update);
+
+		return "redirect:/actor/plays/"+id_actor;  //redirect: vai a endpoint /film/
+	}
+
+	@GetMapping("/del_play/{id}")   // {id} è una path Variable
+	public String deletePlay(@PathVariable Long id) {
+
+		Play p = pr.findById(id).get();
+		pr.delete(p);
+		System.out.println("Cancellazione genere prima del redirect");
+		return "redirect:/actor/plays/"+p.getActor().getId();
+	}
 }
