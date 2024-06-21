@@ -8,6 +8,11 @@ import com.corso.videoteca.entities.Film;
 
 import jakarta.annotation.Nullable;
 
+
+/**
+ * https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
+ */
+
 public interface FilmRepository extends JpaRepository<Film, Long> {
 	
 	List<Film> findAllByOrderByTitle();

@@ -7,7 +7,7 @@
     <div class="container">  
         <div class="card">
             <div class="card-header">   
-                <h3 class="card-title">Lista genere</h3>
+                <h3 class="card-title">Lista Attori</h3>
             </div> 
             <div class="card-body">
                 <div class="table-responsive">
@@ -15,28 +15,39 @@
                         <thead class="table-light">
                             <tr>
                                 <th>ID</th>
-                                <th>Genere</th>
+                                <th>Nome</th>
+                                <th>Cognome</th>
+                                <th>Data di nascita</th>
                                 <th>Azioni</th>
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                            <tr class="table-primary" th:each="genre : ${genres}">
+                            <tr class="table-primary" th:each="actor : ${actors}">
                                 <td>
-                                    <p th:text="${genre.id}"></p>  <!-- non va a legger film.id ma usa film.getId()  -->
+                                    <p th:text="${actor.id}"></p>  <!-- non va a legger film.id ma usa film.getId()  -->
                                 </td>
                                 <td>
-                                    <p th:text="${genre.name}"></p>
+                                    <p th:text="${actor.firstname}"></p>
                                 </td>
                                 <td>
-                                    <a class="btn btn-outline-warning" th:href="@{/genre/update/} + ${genre.id}">
+                                    <p th:text="${actor.lastname}"></p>
+                                </td>
+                                <td>
+                                    <p th:text="${actor.dob}"></p>
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-info" th:href="@{/actor/update/} + ${actor.id}">
+                                        Interpretazioni
+                                    </a> 
+                                    <a class="btn btn-outline-warning" th:href="@{/actor/update/} + ${actor.id}">
                                         Modifica
                                     </a> 
                                     
-                                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-th-data-bs-target="'#modale' + ${genre.id}">
+                                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-th-data-bs-target="'#modale' + ${actor.id}">
                                        Cancella
                                     </button>
 
-                                    <div class="modal fade" th:id="'modale' + ${genre.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal fade" th:id="'modale' + ${actor.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                           <div class="modal-content">
                                             <div class="modal-header">
@@ -44,11 +55,11 @@
                                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Vuoi eliminare il genere <span th:text="${genre.name}"></span>?</p>
+                                                <p>Vuoi eliminare l'attore <span th:text="${actor.firstname} + ' ' + ${actor.lastname}"></span>?</p>
                                             </div>
                                             <div class="modal-footer">
                                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                                              <a type="button" class="btn btn-outline-danger" th:href="@{/genre/delete/} + ${genre.id}">
+                                              <a type="button" class="btn btn-outline-danger" th:href="@{/actor/delete/} + ${actor.id}">
                                                 Elimina
                                                </a>
                                             </div>

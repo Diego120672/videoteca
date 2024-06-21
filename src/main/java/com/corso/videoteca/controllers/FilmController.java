@@ -126,9 +126,11 @@ public class FilmController {
 		
 		if (form.getTitle() != null && form.getTitle().length()>2) {
 			form.setTitle("%"+form.getTitle()+"%");
+			List <Film> risultato = fr.findByTitleLikeIgnoreCaseOrderByTitleAsc(form.getTitle());
+			model.addAttribute("films", risultato);
 		}
-		if (form.getGenre_id() != null ) {
-			List<Film> risultato = fr.findByGenre_IdAndTitleLikeIgnoreCaseOrderByTitleAsc(form.getGenre_id(),form.getTitle());
+		else if (form.getGenre_id() != null ) {
+			List<Film> risultato = fr.findByGenre_IdOrderByTitleAsc(form.getGenre_id());
 			model.addAttribute("films", risultato);
 		}
 		

@@ -41,6 +41,16 @@
                   <li class="nav-item">
                     <a class="nav-link" th:href="@{/film/search}">Ricerca</a>
                   </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Attori
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item"  th:href="@{/actor/}">Lista attori</a></li>
+                      <li><a class="dropdown-item" th:href="@{/actor/create}">Inserisci attori</a></li>
+                    </ul>
+                  </li>
+
                 </ul>
               </div>
             </div>

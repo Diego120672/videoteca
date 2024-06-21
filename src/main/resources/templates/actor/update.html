@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="it">
+
+<head th:replace="~{layout/bs5.html::head}">
+</head>
+
+<body>
+    <header th:replace="~{layout/bs5.html::header}"></header>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Modifica Attore <span th:text="${form.firstname} +' '+${form.lastname}"></span></h3> 
+            </div>
+            <form th:action="@{/actor/update/} + ${form.id}" method="post" th:object="${form}">
+                <div class="card-body">
+                    <div class="mb-3 row">
+                        <label for="firstname" class="col-4 col-form-label">Nome</label>
+                        <div class="col-8">
+                            <input type="text" class="form-control" placeholder="Nome" th:field="*{firstname}" />
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="lastname" class="col-4 col-form-label">Cognome</label>
+                        <div class="col-8">
+                            <input type="text" class="form-control" placeholder="cognome" th:field="*{lastname}" />
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="dob" class="col-4 col-form-label">Data di nascita</label>
+                        <div class="col-8">
+                            <input type="date" class="form-control"  placeholder="Data di nascita"  th:field="*{isoDob}" />
+                        </div>
+                    </div>
+                    <div class="card-footer ">
+                        <button type="submit" class="btn btn-outline-primary">
+                            Invia
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+        <footer th:replace="~{layout/bs5.html::footer}">
+
+        </footer>
+</body>
+
+</html>
