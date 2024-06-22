@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="it" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="~{layout/bs5.html::head}">
-</head>
+<head th:replace="~{layout/bs5.html::head}"></head>
 <body>
 <header th:replace="~{layout/bs5.html::header}"></header>
 <div class="container">
@@ -42,13 +41,12 @@
     <div class="card mt-3">
         <div class="card-header">
             <h3 class="card-title">Storico Interpretazioni</h3>
-            <!--  <p th:text="${prova}"></p> -->
         </div>
 
         <div class="card-body">
             <div class="table-responsive" th:if="${!actor.plays.isEmpty()}">
                 <div class="row" style="margin-right: 0;margin-left: 0;">
-                    <div th:each="play : ${actor.plays}" class="col-md-3">
+                    <div th:each="play : ${actor.plays}" class="col-md-3" style="margin-bottom: 20px">
                         <div class="card bg-light text-center">
                             <div class="card-body justify-content-between align-items-center">
                                 <div>
@@ -61,8 +59,7 @@
                                     <span>Regista</span>
                                     <h6 th:text="${play.film.director}"></h6>
                                     <span>Uscita</span>
-                                    <h7 th:text="${play.film.published}"></h7>
-                                    </p>
+                                    <h6 th:text="${play.film.published}"></h6>
                                 </div>
 
                                 <a class="btn btn-outline-warning" th:href="@{/actor/plays_update/} + ${play.id}+'/'+ ${play.actor.id}">

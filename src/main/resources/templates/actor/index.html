@@ -1,98 +1,80 @@
 <!doctype html>
 <html lang="it">
-
-<head th:replace="~{layout/bs5.html::head}">
-</head>
-
+<head th:replace="~{layout/bs5.html::head}"></head>
 <body>
+    <header th:replace="~{layout/bs5.html::header}"></header>
+    <div class="container">
+        <div class="card mt-3">
+            <div class="card-header">
+                <h3 class="card-title">Lista Attori</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive" th:if="${!actors.isEmpty()}">
+                    <div class="row" style="margin-right: 0;margin-left: 0;">
+                            <div th:each="actor : ${actors}" class="col-md-3" style="margin-bottom: 20px">
+                                <div class="card bg-light text-center">
+                                    <div class="card-body justify-content-between align-items-center">
 
-<header th:replace="~{layout/bs5.html::header}">
-
-</header>
-<div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Lista Attori</h3>
-            <!--  <p th:text="${prova}"></p> -->
-        </div>
-        <div class="card-body">
-            <div class="table-responsive" th:if="${!actors.isEmpty()}">
-                <table class="table table-striped table-hover table-borderless table-primary align-middle">
-                    <thead class="table-light">
-                    <tr>
-                        <th>ID</th>
-                        <th>Cognome</th>
-                        <th>Nome</th>
-                        <th>Data di nascita</th>
-                        <th>Azioni</th>
-                    </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                    <!-- for(Film actor : listaFilm)-->
-                    <tr class="table-primary" th:each="actor : ${actors}">
-                        <td>
-                            <p th:text="${actor.id}"></p>  <!-- non va a legger actor.id ma usa actor.getId()  -->
-                        </td>
-                        <td>
-                            <p th:text="${actor.lastname}"></p>
-                        </td>
-                        <td>
-                            <p th:text="${actor.firstname}"></p>
-                        </td>
-                        <td>
-                            <p th:text="${actor.isoDob}"></p>
-                        </td>
-                        <td>
-                            <a class="btn btn-outline-success" th:href="@{/actor/plays/} + ${actor.id}">
-                                Ruoli Film
-                            </a>
-                            <a class="btn btn-outline-warning" th:href="@{/actor/update/} + ${actor.id}">
-                                Modifica
-                            </a>
-
-                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-th-data-bs-target="'#modale' + ${actor.id}">
-                                Cancella
-                            </button>
-
-                            <div class="modal fade" th:id="'modale' + ${actor.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Conferma cancellazione</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <div>
+                                            <span>Nome</span>
+                                            <h5 class="card-title" th:text="${actor.firstname}+' '+${actor.lastname}"></h5>
+                                            <span>Data di nascita</span>
+                                            <h5>
+                                                <a th:text="${actor.dob}"></a>
+                                            </h5>
                                         </div>
-                                        <div class="modal-body">
-                                            <p>Vuoi eliminare il actor <span th:text="${actor.lastname} +' ' + ${actor.firstname}"></span>?</p>
+
+                                        <a class="btn btn-outline-warning" th:href="@{/actor/update/} + ${actor.id}">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+
+                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                                data-th-data-bs-target="'#modale' + ${actor.id}">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                        <div class="modal fade" th:id="'modale' + ${actor.id}" data-bs-backdrop="static"
+                                             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Conferma
+                                                            cancellazione</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Vuoi eliminare l'attore <span
+                                                                th:text="${actor.firstname}+' '+${actor.lastname}"></span>?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                            Annulla
+                                                        </button>
+                                                        <a type="button" class="btn btn-outline-danger"
+                                                           th:href="@{/actor/delete/} + ${actor.id}">
+                                                            Elimina
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                                            <a type="button" class="btn btn-outline-danger" th:href="@{/actor/delete/} + ${actor.id}">
-                                                Elimina
-                                            </a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
 
-
-
-
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="container" th:if="${actors.isEmpty()}">
-                <div class="alert alert-warning" role="alert">
-                    La rircerca non ha prodotto nessun risultato
+                <div class="container" th:if="${actors.isEmpty()}">
+                    <div class="alert alert-warning" role="alert">
+                        <p>Ancora nessuna interpretazione del nostro database</p>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
-</div>
-<footer th:replace="~{layout/bs5.html::footer}">
-</footer>
+
+    <footer th:replace="~{layout/bs5.html::footer}">
+    </footer>
 
 </body>
