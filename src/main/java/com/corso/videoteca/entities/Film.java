@@ -48,5 +48,10 @@ public class Film {
         return this.published.format(DateTimeFormatter.ISO_DATE);
     }
 
+    public Integer getYear(){
+
+        return this.published.getYear();
+    }
+
 
 }

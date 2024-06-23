@@ -12,7 +12,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Lista Film</h3>
+            <h3 class="card-title" >Lista Film</h3>
         </div>
         <div class="card-body">
             <div class="alert alert-warning" role="alert" th:if="${films.isEmpty}">
@@ -24,24 +24,19 @@
                         <div class="card bg-light text-center">
                             <div class="card-body justify-content-between align-items-center">
                                 <div>
-                                    <span>Titolo</span>
                                     <h5 class="card-title" th:text="${film.title}"></h5>
                                     <p class="card-text">
-                                        <span>Regista</span>
-                                        <h6 th:text="${film.director}"></h6>
+                                        <h6 class="bi bi-camera-reels" th:text="${film.director}"></h6>
                                     </p>
                                     <p>
-                                        <span>Durata </span>
+                                        <i class="bi bi-clock"> </i>
                                         <span th:text="${film.duration}"></span>
-                                        <span> minuti</span>
-                                    </p>
-                                    <p>
-                                        <span>Genere </span>
-                                        <span th:text="${film.genre.name}"></span>
-                                    </p>
-                                    <p>
-                                        <span>Data Rilascio</span>
-                                        <span th:text="${film.isoPublished}"></span>
+                                        <span> min. - </span>
+
+                                        <span th:text="${film.genre.name}"> - </span>
+
+                                        <i class="bi bi-calendar-event"></i>
+                                        <span th:text="${film.year}"></span>
                                     </p>
                                     <a class="btn btn-outline-info" th:href="@{/film/plays/} + ${film.id}">
                                         <i class="bi bi-file-person"></i>

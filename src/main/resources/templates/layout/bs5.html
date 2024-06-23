@@ -12,57 +12,59 @@
 </head>
 <body>
     <header  th:fragment="header" class="mb-3">
-        <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;" data-bs-theme="light"> 
+        <nav class="navbar navbar-expand-lg" style="background-color:rgb(210, 37, 51);" data-bs-theme="light"> 
             <div class="container-fluid">
-                <a class="navbar-brand" th:href="@{/}">Videoteca</a>
+                <a class="navbar-brand" th:href="@{/}">
+                    <img width="50%" src="https://imgs.search.brave.com/GDd60ZJZ_kOEV0KVGV32xLJgf1cHdwDOPRJJ5pm_S-U/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2l4c3RhdGlj/LmNvbS9tZWRpYS8y/MmM0MzFfMGNiZDQ1/ZWIzYzA2NGY0Y2Fh/YmFhNGNmOGYxN2Zm/MzZ-bXYyLnBuZy92/MS9maWxsL3dfNjky/LGhfMjY0LGFsX2Ms/cV84NSx1c21fMC42/Nl8xLjAwXzAuMDEs/ZW5jX2F1dG8vbG9n/byUyMGRvcy5wbmc" alt="Logo"></a>
+        
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Film
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item"  th:href="@{/film/}">Lista</a></li>
-                            <li><a class="dropdown-item" th:href="@{/film/create}">Inserisci Film</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Genere
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item"  th:href="@{/genre/}">Lista genere</a></li>
-                            <li><a class="dropdown-item" th:href="@{/genre/create}">Inserisci genere</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/film/search}">Ricerca</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Attori
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item"  th:href="@{/actor/}">Lista attori</a></li>
-                            <li><a class="dropdown-item" th:href="@{/actor/create}">Inserisci attori</a></li>
-                        </ul>
-                    </li>
-                </ul>
-              </div>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Film
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"  th:href="@{/film/}">Lista</a></li>
+                                <li><a class="dropdown-item" th:href="@{/film/create}">Inserisci Film</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Genere
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"  th:href="@{/genre/}">Lista genere</a></li>
+                                <li><a class="dropdown-item" th:href="@{/genre/create}">Inserisci genere</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/film/search}">Ricerca</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Attori
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"  th:href="@{/actor/}">Lista attori</a></li>
+                                <li><a class="dropdown-item" th:href="@{/actor/create}">Inserisci attori</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </nav>
+        </nav>
     </header>
 
 
 
 
-    <footer th:fragment="footer" class="bg-dark container-fluix fixed-bottom">
-        <div class="text-light">
-            <p>MDB, Movie DataBase, via fasulla 123, Selargius</p>
+    <footer th:fragment="footer" style="background-color:rgb(210, 37, 51);" class="container-fluix fixed-bottom">
+        <div class="text-light text-center">
+            <p>La videoteca on line, Movie DataBase, Via Tuscolana, N. 1055 – 00173 Roma (ITALIA) </p>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
