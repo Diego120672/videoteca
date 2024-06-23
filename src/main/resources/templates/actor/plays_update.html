@@ -7,10 +7,10 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Modifica interpretazione di <span th:text="${play.actor.firstname}"></span> <span th:text="${play.actor.lastname}"></span></h3>
+            <h3 class="card-title">Modifica interpretazione di <span th:text="${form.actor.firstname}"></span> <span th:text="${form.actor.lastname}"></span></h3>
         </div>
 
-        <form th:action="'/actor/plays_update/'+${play.id}+'/'+${play.actor.id}" method="post" th:object="${play}">
+        <form th:action="'/actor/plays_update/'+${form.id}" method="post" th:object="${form}"><!-- ATTENZIONE CHE FORSE è PLAY -->
             <div class="card-body">
                 <div class="mb-3 row">
                     <label for="role" class="col-4 col-form-label">Ruolo</label>
@@ -22,7 +22,7 @@
                     <label for="film" class="col-4 col-form-label">Film</label>
                     <div class="col-8">
                         <select class="form-control" placeholder="Film" th:field="*{film}">
-                            <option th:value="${play.film.id}" th:text="${play.film.title}"></option>
+                            <option th:value="${form.film.id}" th:text="${form.film.title}"></option>
                             <option th:each="f : ${films}"
                                     th:value="${f.id}"
                                     th:text="${f.title}">
@@ -48,9 +48,9 @@
         </div>
 
         <div class="card-body">
-            <div class="table-responsive" th:if="${!actor.plays.isEmpty()}">
+            <div class="table-responsive" th:if="${!form.actor.plays.isEmpty()}">
                 <div class="row" style="margin-right: 0;margin-left: 0;">
-                    <div th:each="play : ${actor.plays}" class="col-md-3" style="margin-bottom: 20px">
+                    <div th:each="play : ${form.actor.plays}" class="col-md-3">
                         <div class="card bg-light text-center">
                             <div class="card-body justify-content-between align-items-center">
                                 <div>
@@ -67,37 +67,38 @@
                                     </p>
                                 </div>
 
-                                <a class="btn btn-outline-warning" th:href="@{/actor/plays_update/} + ${play.id}+'/'+ ${play.actor.id}">
+                                <a class="btn btn-outline-warning" th:href="@{/actor/plays_update/} + ${play.id}">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
 
-                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-                                        data-th-data-bs-target="'#modale' + ${play.id}">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                                <div class="modal fade" th:id="'modale' + ${play.id}" data-bs-backdrop="static"
-                                     data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Conferma
-                                                    cancellazione</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Vuoi eliminare l'interpretazione <span
-                                                        th:text="${play.film.title}"></span>?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    Annulla
-                                                </button>
-                                                <a type="button" class="btn btn-outline-danger"
-                                                   th:href="@{/actor/del_play/} + ${play.id}">
-                                                    Elimina
-                                                </a>
+                                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                            data-th-data-bs-target="'#modale' + ${play.id}">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                    <div class="modal fade" th:id="'modale' + ${play.id}" data-bs-backdrop="static"
+                                         data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Conferma
+                                                        cancellazione</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Vuoi eliminare l'interpretazione in <span
+                                                            th:text="${play.film.title}"></span>?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                        Annulla
+                                                    </button>
+                                                    <a type="button" class="btn btn-outline-danger"
+                                                       th:href="@{/actor/del_play/} + ${play.id}">
+                                                        Elimina
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -108,7 +109,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
 </div>
 <footer th:replace="~{layout/bs5.html::footer}">

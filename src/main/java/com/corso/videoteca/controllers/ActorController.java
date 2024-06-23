@@ -127,29 +127,42 @@ public class ActorController {
 		return "redirect:/actor/plays/"+ form.getActor().getId();
 	}
 
-	@GetMapping("plays_update/{id}/{id_actor}")   // {id} è una path Variable
-	public String playsUpdate(@PathVariable Long id,@PathVariable Long id_actor, Model model) {
+//	@GetMapping("plays_update/{id}/{id_actor}")   // {id} è una path Variable
+//	public String playsUpdate(@PathVariable Long id,@PathVariable Long id_actor, Model model) {
+//
+//
+//		Actor actor = ar.findById(id_actor).get();
+//
+//		model.addAttribute(actor);
+//		Play form = new Play();
+//
+//		form.setId(null);
+//		model.addAttribute("form", form);
+//		model.addAttribute("films", fr.findAllByOrderByTitle());
+//
+//
+//
+//		Play play = pr.findById(id).get();
+//
+//		model.addAttribute("play",play);
+//		model.addAttribute("films", fr.findAllByOrderByTitle());
+//
+//		System.out.println("id attore -> "+id+" id film -> "+id);
+//
+//		return "actor/plays"+id_actor;
+//	}
 
+	@GetMapping("plays_update/{id_play}")   // {id} è una path Variable
+	public String playsUpdate(@PathVariable Long id_play, Model model) {
 
-		Actor actor = ar.findById(id_actor).get();
+		Play play = pr.findById(id_play).get();
 
-		model.addAttribute(actor);
-		Play form = new Play();
-
-		form.setId(null);
-		model.addAttribute("form", form);
+		model.addAttribute("form",play);
 		model.addAttribute("films", fr.findAllByOrderByTitle());
 
+		System.out.println("------------------A "+play.getActor().getId()+"F "+play.getFilm().getId()+"R "+play.getRole());
 
-
-		Play play = pr.findById(id).get();
-
-		model.addAttribute("play",play);
-		model.addAttribute("films", fr.findAllByOrderByTitle());
-
-		System.out.println("id attore -> "+id+" id film -> "+id);
-
-		return "actor/plays"+id_actor;
+		return "actor/plays_update";
 	}
 
 	@PostMapping("plays_update/{id}/{id_actor}")
@@ -161,7 +174,7 @@ public class ActorController {
 
 		form.setId(id); //IMPOSTA L'ID
 		System.out.println("++"+form.toString());
-		 pr.save(form);
+		pr.save(form);
 		System.out.println("-"+id);
 		//System.out.println(update);
 
