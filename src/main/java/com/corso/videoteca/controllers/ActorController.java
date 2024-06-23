@@ -111,20 +111,20 @@ public class ActorController {
 	}
 
 
-	@PostMapping("plays/{id}")
-	public String storePlays(Model model,Play form,@PathVariable Long id ) {
+	@PostMapping("plays/{id_actor}")
+	public String storePlays(Model model,Play form,@PathVariable Long id_actor ) {
 		System.out.println("POST Play");
-
+		System.out.println("Plays -> "+"form.getActor().getId()"+" "+form.getFilm().getId()+" "+form.getRole()+" "+form.getId());
 		Play p=new Play();
 
-		Actor actor = ar.findById(id).get();
+		Actor actor = ar.findById(id_actor).get();
 		form.setActor(actor);
-		System.out.println("Plays -> "+form);
+		System.out.println("Plays -> "+form.getActor().getId()+" "+form.getFilm().getId()+" "+form.getRole()+" "+form.getId());
 		p=pr.save(form);
 
 		System.out.println("id play "+p.getId()+" "+form.getId());
 
-		return "redirect:/actor/plays/"+ form.getId();
+		return "redirect:/actor/plays/"+ form.getActor().getId();
 	}
 
 	@GetMapping("plays_update/{id}/{id_actor}")   // {id} è una path Variable
@@ -149,7 +149,7 @@ public class ActorController {
 
 		System.out.println("id attore -> "+id+" id film -> "+id);
 
-		return "actor/plays_update";
+		return "actor/plays"+id_actor;
 	}
 
 	@PostMapping("plays_update/{id}/{id_actor}")
