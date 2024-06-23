@@ -9,69 +9,35 @@
         <div class="card-header">
             <h3 class="card-title">Interpreti di <span th:text="${film.title}"></span></h3>
         </div>
-        <!--
-        <form th:action="'/actor/plays/'+${film.id}" method="post" th:object="${form}">
+        <div class="card mt-3">
             <div class="card-body">
-                <div class="mb-3 row">
-                    <label for="role" class="col-4 col-form-label">Ruolo</label>
-                    <div class="col-8">
-                        <input type="text" class="form-control" placeholder="Ruolo" th:field="*{role}"/>
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="film" class="col-4 col-form-label">Film</label>
-                    <div class="col-8">
-                        <select class="form-control" placeholder="Film" th:field="*{film}">
-                            <option value="">Selezionare un film</option>
-                            <option th:each="film : ${films}"
-                                    th:value="${film.id}"
-                                    th:text="${film.title}"></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer ">
-                <button type="submit" class="btn btn-outline-primary">
-                    Invia
-                </button>
-            </div>
-    </div>
-    </form>
-
-    -->
-    <div class="card mt-3">
-        <div class="card-header">
-            <h3 class="card-title">Interpreti</h3>
-            <!--  <p th:text="${prova}"></p> -->
-        </div>
-        <div class="card-body">
-            <div class="table-responsive" th:if="${!film.plays.isEmpty()}">
-                <div class="row" style="margin-right: 0;margin-left: 0;">
-                    <div th:each="play : ${film.plays}" class="col-md-3" style="margin-bottom: 20px">
-                        <div class="card bg-light text-center">
-                            <div class="card-body justify-content-between align-items-center">
-                                <div>
-                                    <span>Ruolo</span>
-                                    <h4 class="card-title" th:text="${play.role}"></h4>
-                                    <p class="card-text">
-                                        <span>Attore</span>
-                                        <h5>
-                                            <a th:href="@{/actor/plays/} + ${play.actor.id}" th:text="${play.actor.firstname}+' '+${play.actor.lastname}"></a>
-                                        </h5>
-                                    </p>
+                <div class="table-responsive" th:if="${!film.plays.isEmpty()}">
+                    <div class="row" style="margin-right: 0;margin-left: 0;">
+                        <div th:each="play : ${film.plays}" class="col-md-3" style="margin-bottom: 20px">
+                            <div class="card bg-light text-center">
+                                <div class="card-body justify-content-between align-items-center">
+                                    <div>
+                                        <span>Ruolo</span>
+                                        <h4 class="card-title" th:text="${play.role}"></h4>
+                                        <p class="card-text">
+                                            <span>Attore</span>
+                                            <h5>
+                                                <a th:href="@{/actor/plays/} + ${play.actor.id}" th:text="${play.actor.firstname}+' '+${play.actor.lastname}"></a>
+                                            </h5>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="container" th:if="${film.plays.isEmpty()}">
-                <div class="alert alert-warning" role="alert">
-                    <p>Ancora nessun interprete nel nostro database</p>
+                <div class="container" th:if="${film.plays.isEmpty()}">
+                    <div class="alert alert-warning" role="alert">
+                        <p>Ancora nessun interprete nel nostro database</p>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
