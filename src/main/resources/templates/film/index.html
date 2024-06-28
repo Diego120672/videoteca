@@ -75,81 +75,8 @@
             </div>
         </div>
     </div>
-<!--                <table class="table table-striped table-hover table-borderless table-primary align-middle">-->
-<!--                    <thead class="table-light">-->
-<!--                        <tr>-->
-<!--                            <th>ID</th>-->
-<!--                            <th>Titolo</th>-->
-<!--                            <th>Regista</th>-->
-<!--                            <th>Durata</th>-->
-<!--                            <th>Genere</th>-->
-<!--                            <th>Data Rilasco</th>-->
-<!--                            <th>Azioni</th>-->
-<!--                        </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody class="table-group-divider">-->
-<!--                        &lt;!&ndash; for(Film film : listaFilm)&ndash;&gt;-->
-<!--                        <tr class="table-primary" th:each="film : ${films}">-->
-<!--                            <td>-->
-<!--                                <p th:text="${film.id}"></p>  &lt;!&ndash; non va a legger film.id ma usa film.getId()  &ndash;&gt;-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <p th:text="${film.title}"></p>-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <p th:text="${film.director}"></p>-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <p>-->
-<!--                                    <span th:text="${film.duration}"></span>-->
-<!--                                     <span>Minuti</span>-->
-<!--                                </p>-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <p th:if="${film.genre != null}">-->
-<!--                                    <span th:text="${film.genre.name}"></span>-->
-<!--                                </p>-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <p th:text="${film.isoPublished}"></p>-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <a class="btn btn-outline-warning" th:href="@{/film/plays/} + ${film.id}">-->
-<!--                                    Interpreti-->
-<!--                                </a>-->
 
-<!--                                <a class="btn btn-outline-warning" th:href="@{/film/update/} + ${film.id}">-->
-<!--                                    Modifica-->
-<!--                                </a>-->
-
-<!--                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-th-data-bs-target="'#modale' + ${film.id}">-->
-<!--                                   Cancella-->
-<!--                                </button>-->
-
-<!--                                <div class="modal fade" th:id="'modale' + ${film.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
-<!--                                    <div class="modal-dialog">-->
-<!--                                        <div class="modal-content">-->
-<!--                                            <div class="modal-header">-->
-<!--                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Conferma cancellazione</h1>-->
-<!--                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                                            </div>-->
-<!--                                            <div class="modal-body">-->
-<!--                                                <p>Vuoi eliminare il film <span th:text="${film.title}"></span>?</p>-->
-<!--                                            </div>-->
-<!--                                            <div class="modal-footer">-->
-<!--                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>-->
-<!--                                                <a type="button" class="btn btn-outline-danger" th:href="@{/film/delete/} + ${film.id}">-->
-<!--                                                    Elimina-->
-<!--                                                </a>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
-</div>
+</div><br><br><br><br>
 <footer th:replace="~{layout/bs5.html::footer}">
 
 </footer>

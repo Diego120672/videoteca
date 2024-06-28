@@ -1,62 +1,20 @@
 <!doctype html>
 <html lang="it">
-
-<head th:replace="~{layout/bs5.html::head}">
-</head> 
-
-<body> 
-
-    <header th:replace="~{layout/bs5.html::header}">
-
-    </header> 
+<head th:replace="~{layout/bs5.html::head}"></head>
+<body>
+    <header th:replace="~{layout/bs5.html::header}"></header>
     <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Videoteca</h3> 
-               <!--  <p th:text="${prova}"></p> -->
-            </div>
-           
+        <div class="card mt-3">
 
-            <form action="/test" method="post" th:object="${form}">
-                <div class="card-body">
-                    <div class="mb-3 row">
-                        <label for="firstname" class="col-4 col-form-label">Nome</label>
-                        <div class="col-8">
-                            <input type="text" class="form-control" placeholder="nome" th:field="*{firstname}" />
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="lastname" class="col-4 col-form-label">Cognome</label>
-                        <div class="col-8">
-                            <input type="text" class="form-control"  placeholder="cognome"  th:field="*{lastname}" />
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="number" class="col-4 col-form-label">Numeri</label>
-                        <div class="col-8">
-                            <select class="form-control" placeholder="numero"   th:field="*{number}">
-                                <option value="1">Uno</option>
-                                <option value="2">due</option>
-                                <option value="3">tre</option>
-                                <option value="4">quattro</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer ">
-                    <button type="submit" class="btn btn-outline-primary">
-                        Invia
-                    </button>
-                </div>
+            <img src="https://imgs.search.brave.com/GDd60ZJZ_kOEV0KVGV32xLJgf1cHdwDOPRJJ5pm_S-U/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMud2l4c3RhdGlj/LmNvbS9tZWRpYS8y/MmM0MzFfMGNiZDQ1/ZWIzYzA2NGY0Y2Fh/YmFhNGNmOGYxN2Zm/MzZ-bXYyLnBuZy92/MS9maWxsL3dfNjky/LGhfMjY0LGFsX2Ms/cV84NSx1c21fMC42/Nl8xLjAwXzAuMDEs/ZW5jX2F1dG8vbG9n/byUyMGRvcy5wbmc" alt="Logo"></a>
+            <div >
+                <h1 class="card-title text-center"> VIDEO TOSTI</h1>
+                <h1 class="card-title text-center"> PER TUTTI I COSTI</h1>
             </div>
-        </form>
+        </div>
     </div>
-
-
-
+<div> <br><br><br><br>
     <footer th:replace="~{layout/bs5.html::footer}">
-
     </footer>
+</div>
 </body>
-
-</html>
